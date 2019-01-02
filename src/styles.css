@@ -1,0 +1,23 @@
+@import url("https://fonts.googleapis.com/css?family=Roboto:300,400,500");
+.App {
+  font-family: sans-serif;
+  text-align: center;
+}
+
+.content {
+  display: flex;
+  padding-top: 50px;
+  align-items: center;
+  justify-content: center;
+}
+
+.card {
+  width: 70%;
+  padding: 20px;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+}
