@@ -11,11 +11,12 @@ import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
 import IconButton from "@material-ui/core/IconButton";
 import MenuIcon from "@material-ui/icons/Menu";
+import Highlight from "react-highlight";
 
 class App extends React.Component {
   state = {
-    modelA: "",
-    modelB: ""
+    modelA: "Post",
+    modelB: "Category"
   };
 
   modelsToPivot() {
@@ -55,6 +56,7 @@ class App extends React.Component {
             <CardContent>
               <form>
                 <TextField
+                  value={this.state.modelA}
                   onChange={e => this.setState({ modelA: e.target.value })}
                   type="text"
                   label="Enter a Model Name"
@@ -62,6 +64,7 @@ class App extends React.Component {
                 <br />
                 <br />
                 <TextField
+                  value={this.state.modelB}
                   onChange={e => this.setState({ modelB: e.target.value })}
                   type="text"
                   label="Enter another Model name"
@@ -69,15 +72,35 @@ class App extends React.Component {
               </form>
             </CardContent>
             <CardActions>
-              <div />
               <Typography variant="h5" color="inherit">
-                {this.modelsToPivot()}
+                Table Name: {this.modelsToPivot()}
               </Typography>
             </CardActions>
+
+            <div>
+              <Typography component="p" color="inherit">
+                Generated Schema
+              </Typography>
+              <Highlight language="php">{`
+ /** Create a migration file and put the following code in it**/
+Schema::create('${this.modelsToPivot()}', function (Blueprint $table) {                  
+    $table->unsignedInteger('${this.getForiegnKey(this.state.modelA)}')
+    $table->unsignedInteger('${this.getForiegnKey(this.state.modelB)}')
+});
+`}</Highlight>
+            </div>
           </Card>
         </div>
       </div>
     );
+  }
+
+  getForiegnKey(model) {
+    return model
+      .split(/(?=[A-Z])/)
+      .join("_")
+      .toLowerCase()
+      .concat("_id");
   }
 }
 

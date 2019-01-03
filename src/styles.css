@@ -1,7 +1,8 @@
 @import url("https://fonts.googleapis.com/css?family=Roboto:300,400,500");
+@import url("https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/atelier-cave-dark.min.css");
+
 .App {
-  font-family: sans-serif;
-  text-align: center;
+  padding: 0;
 }
 
 .content {
